@@ -1,0 +1,88 @@
+[gd_resource type="Theme" load_steps=8 format=2]
+
+[ext_resource path="res://assets/fonts/poco.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/StyleBoxTextures/container_icon_styleboxtexture.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/StyleBoxTextures/container_text_styleboxtexture.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/ui/StyleBoxTextures/window_brown_styleboxtexture.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/ui/StyleBoxTextures/border_white_pressed_styleboxtexture.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/ui/StyleBoxTextures/border_white_styleboxtexture.tres" type="StyleBox" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0, 0, 0, 1 )
+draw_center = true
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0, 0, 0, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 1
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = false
+anti_aliasing_size = 1
+_sections_unfolded = [ "Anti Aliasing", "Border", "Border Width" ]
+
+[resource]
+
+Button/colors/font_color = Color( 0.445312, 0.347836, 0.290497, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = ExtResource( 1 )
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = null
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 2 )
+Button/styles/pressed = ExtResource( 2 )
+Label/colors/font_color = Color( 0.4, 0.32549, 0.286275, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/constants/line_spacing = 0
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = ExtResource( 1 )
+Label/styles/normal = null
+LineEdit/colors/cursor_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/font_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/font_color_selected = Color( 1, 1, 1, 1 )
+LineEdit/colors/selection_color = Color( 0.203799, 0.195831, 0.242188, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = ExtResource( 1 )
+LineEdit/styles/focus = null
+LineEdit/styles/normal = ExtResource( 3 )
+LineEdit/styles/read_only = null
+PanelContainer/styles/panel = ExtResource( 4 )
+ToolButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+ToolButton/colors/font_color_disabled = Color( 0.9, 0.95, 1, 0.3 )
+ToolButton/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+ToolButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+ToolButton/constants/hseparation = 2
+ToolButton/fonts/font = ExtResource( 1 )
+ToolButton/styles/disabled = null
+ToolButton/styles/focus = null
+ToolButton/styles/hover = ExtResource( 5 )
+ToolButton/styles/normal = ExtResource( 6 )
+ToolButton/styles/pressed = ExtResource( 5 )
+TooltipLabel/colors/font_color = Color( 0.808594, 0.384605, 0.04422, 1 )
+TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+TooltipLabel/constants/shadow_offset_x = 1
+TooltipLabel/constants/shadow_offset_y = 1
+TooltipLabel/fonts/font = ExtResource( 1 )
+TooltipPanel/styles/panel = ExtResource( 4 )
+_sections_unfolded = [ "Fonts", "Fonts/fonts", "Label/styles", "LineEdit/colors", "LineEdit/styles", "Panel", "Panel/styles", "PanelContainer/styles", "TooltipLabel/fonts", "TooltipPanel", "TooltipPanel/styles" ]
+

@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Hex/Hex.gd" type="Script" id=1]
+[ext_resource path="res://assets/raw/tiles/grass.png" type="Texture" id=2]
+[ext_resource path="res://Hex/HexDebug.gd" type="Script" id=3]
+
+
+
+[node name="Hex" type="Node2D"]
+
+z_index = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+size = Vector2( 12, 10 )
+cube_coords = Vector3( 0, 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+z_index = -1
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="Area" type="Area2D" parent="." index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Area" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -1, -5, 1, -5, 6, -2, 6, 2, 1, 5, -1, 5, -6, 2, -6, -2 )
+
+[node name="Debug" type="Node2D" parent="." index="2"]
+
+visible = false
+script = ExtResource( 3 )
+_sections_unfolded = [ "Pause" ]
+
+[connection signal="mouse_entered" from="Area" to="Debug" method="_on_Area_mouse_entered"]
+
+[connection signal="mouse_exited" from="Area" to="Debug" method="_on_Area_mouse_exited"]
+
+

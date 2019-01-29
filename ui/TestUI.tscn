@@ -1,0 +1,635 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/ui/Themes/theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/raw/ui/dice.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/poco.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/StyleBoxTextures/container_text_styleboxtexture.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/raw/ui/empty_8.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/StyleBoxTextures/container_basic_styleboxtexture.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/ui/StyleBoxTextures/container_basic_selected_styleboxtexture.tres" type="StyleBox" id=7]
+
+[sub_resource type="ButtonGroup" id=1]
+
+resource_local_to_scene = true
+_sections_unfolded = [ "Resource" ]
+
+[node name="Panel" type="PanelContainer" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -138.0
+margin_top = -88.0
+margin_right = 138.0
+margin_bottom = 87.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 271.0
+margin_bottom = 170.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 5
+alignment = 0
+_sections_unfolded = [ "custom_constants" ]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 221.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 5
+alignment = 0
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="VSplitContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 125.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 125, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 2
+alignment = 0
+_sections_unfolded = [ "Rect" ]
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/VSplitContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 50.0
+margin_bottom = 8.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.402344, 0.329123, 0.289185, 1 )
+text = "Realm name"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VSplitContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 10.0
+margin_right = 125.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+custom_constants/separation = 1
+alignment = 0
+_sections_unfolded = [ "Rect", "custom_constants" ]
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer2/VSplitContainer/HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 110.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+text = "Realm Name"
+max_length = 40
+focus_mode = 2
+context_menu_enabled = false
+placeholder_alpha = 0.6
+caret_blink = true
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Size Flags", "Theme" ]
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2/VSplitContainer/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 111.0
+margin_right = 125.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Randomize"
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+disabled = true
+toggle_mode = true
+enabled_focus_mode = 0
+shortcut = null
+group = null
+icon = ExtResource( 2 )
+flat = false
+align = 1
+_sections_unfolded = [ "Textures", "Theme" ]
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/VSplitContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 26.0
+margin_right = 57.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+text = "(Min 3 chars)"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme" ]
+
+[node name="VSplitContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 130.0
+margin_right = 221.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 2
+alignment = 0
+_sections_unfolded = [ "Rect", "custom_constants" ]
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/VSplitContainer2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 20.0
+margin_bottom = 8.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.402344, 0.329123, 0.289185, 1 )
+text = "Seed"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme", "custom_fonts" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/VSplitContainer2" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 10.0
+margin_right = 91.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 1
+alignment = 0
+_sections_unfolded = [ "Rect", "Size Flags", "custom_constants" ]
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer2/VSplitContainer2/HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 31.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_styles/read_only = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+custom_constants/minimum_spaces = 5
+text = "1234"
+max_length = 40
+focus_mode = 2
+context_menu_enabled = true
+placeholder_alpha = 0.6
+caret_blink = true
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Rect", "Size Flags", "custom_constants" ]
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2/VSplitContainer2/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_right = 91.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Randomize"
+icon = ExtResource( 2 )
+flat = false
+align = 1
+_sections_unfolded = [ "Theme" ]
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2/VSplitContainer2" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 26.0
+margin_right = 50.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.402344, 0.329123, 0.289185, 1 )
+text = "(Min 1 digit)"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme", "custom_fonts" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 39.0
+margin_right = 266.0
+margin_bottom = 89.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_icons/radio_checked = ExtResource( 5 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/radio_unchecked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = SubResource( 1 )
+flat = false
+align = 0
+_sections_unfolded = [ "Rect" ]
+
+[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_icons/radio_checked = ExtResource( 5 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/radio_unchecked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = SubResource( 1 )
+flat = false
+align = 0
+_sections_unfolded = [ "Rect", "custom_fonts", "custom_icons", "custom_styles" ]
+
+[node name="CheckBox3" type="CheckBox" parent="VBoxContainer/HBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_icons/radio_checked = ExtResource( 5 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/radio_unchecked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = SubResource( 1 )
+flat = false
+align = 0
+_sections_unfolded = [ "Rect", "custom_fonts", "custom_icons", "custom_styles" ]
+
+[node name="CheckBox4" type="CheckBox" parent="VBoxContainer/HBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 162.0
+margin_right = 212.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_icons/radio_checked = ExtResource( 5 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/radio_unchecked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = SubResource( 1 )
+flat = false
+align = 0
+_sections_unfolded = [ "Rect", "custom_fonts", "custom_icons", "custom_styles" ]
+
+[node name="CheckBox5" type="CheckBox" parent="VBoxContainer/HBoxContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 216.0
+margin_right = 266.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_icons/radio_checked = ExtResource( 5 )
+custom_icons/checked = ExtResource( 5 )
+custom_icons/radio_unchecked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = SubResource( 1 )
+flat = false
+align = 0
+_sections_unfolded = [ "Rect", "custom_fonts", "custom_icons", "custom_styles" ]
+
+[node name="Text" type="Label" parent="VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 94.0
+margin_right = 266.0
+margin_bottom = 146.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor massa nec mauris auctor elementum. Mauris condimentum aliquet ornare. Etiam commodo imperdiet finibus. Mauris finibus enim ut consectetur congue. In nunc velit, posuere ac lectus sit amet, volutpat convallis dui."
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 151.0
+margin_right = 266.0
+margin_bottom = 165.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 1
+alignment = 2
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
+
+[node name="Button" type="ToolButton" parent="VBoxContainer/HBoxContainer3" index="0"]
+
+modulate = Color( 0.714844, 0.0530548, 0.0530548, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 115.0
+margin_right = 190.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 75, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "BACK"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme", "Visibility" ]
+
+[node name="Button3" type="ToolButton" parent="VBoxContainer/HBoxContainer3" index="1"]
+
+modulate = Color( 0.135895, 0.570312, 0.163046, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 191.0
+margin_right = 266.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 75, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "ACCEPT"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme" ]
+
+
