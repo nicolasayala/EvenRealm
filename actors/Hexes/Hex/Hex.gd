@@ -1,5 +1,15 @@
 extends Node2D
 
+enum HEX_TYPE {
+	VOID,
+	WATER,
+	GRASS,
+	SAND,
+	ALIEN
+}
+export (HEX_TYPE) var type = VOID
+var id = 0 setget set_id
+
 const DIR_E = Vector3(1, -1, 0)
 const DIR_NE = Vector3(1, 0, -1)
 const DIR_NW = Vector3(0, 1, -1)
@@ -65,9 +75,8 @@ func get_rect(w, h):
 	for q in range(- w / 2, w / 2 + 1):
 		for r in range(- h / 2, h / 2 + 1):
 			coords.append(cube_coords + axial_to_cube_coords(Vector2(q - ceil(r / 2.0), r)))
-			#if (q != w / 2):
-			#	coords.append(cube_coords + axial_to_cube_coords(Vector2(q - a, 2*a + 1)))
 	return coords
 
-func _on_Area2D_mouse_entered():
-	print(cube_coords)
+func set_id(n):
+	id = n
+	$Tile.set_tile_id(id)

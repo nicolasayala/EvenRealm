@@ -1,9 +1,10 @@
 extends Node2D
 
-var Hex = preload("./Hex.tscn")
-
-export (Texture) var grass 
-export (Texture) var water
+export (PackedScene) var HexVoid
+export (PackedScene) var HexGrass
+export (PackedScene) var HexWater
+export (PackedScene) var HexSand
+export (PackedScene) var HexAlien
 
 const DIR_E = Vector3(1, -1, 0)
 const DIR_NE = Vector3(1, 0, -1)
@@ -19,22 +20,34 @@ var hex_size
 var hex_transform
 var hex_transform_inv
 
+var grid = Dictionary()
+
 func _ready():
 	set_hex_scale(hex_scale)
 	var hex = add_hex(Vector3(0, 0, 0))
-	for coord in hex.get_rect(50, 48): ##54/52
+	for coord in hex.get_rect(50, 48): ##fullscreen 50/48
 		add_hex(coord)
+	update_hexes_tiles()
 
 func add_hex(coords):
-	var hex = Hex.instance()
-	if (randf() > 0.66):
-		hex.get_node("Sprite").texture = grass
+	if (grid.has(coords)):
+		return
+	
+	var hex
+	var r = randf()
+	if (r > 0.95):
+		hex = HexAlien.instance()
+	elif (r > 0.65):
+		hex = HexGrass.instance()
+	elif (r > 0.40):
+		hex = HexSand.instance()
 	else:
-		hex.get_node("Sprite").texture = water
+		hex = HexWater.instance()
 	hex.set_cube_coords(coords)
 	hex.size = hex_size
 	hex.position = get_hex_center(hex)
 	add_child(hex)
+	grid[coords] = hex
 	return hex
 
 func set_hex_scale(scale):
@@ -46,6 +59,24 @@ func set_hex_scale(scale):
 		Vector2(0, 0)
 	)
 	hex_transform_inv = hex_transform.affine_inverse()
-	
+
 func get_hex_center(hex):
 	return hex_transform * hex.axial_coords
+
+func update_hexes_tiles():
+	for hex in grid.values():
+		hex.set_id(compute_hex_id(hex))
+
+func compute_hex_id(hex):
+	var id = 0
+	var n = 1
+	var hex_type = hex.type
+	for coord in hex.get_adjacents():
+		if grid.has(coord):
+			var other_type = grid[coord].type
+			if other_type != hex_type :
+				id += n
+		else:
+			id += n
+		n *= 2
+	return id

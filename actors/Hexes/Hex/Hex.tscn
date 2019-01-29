@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Hex/Hex.gd" type="Script" id=1]
-[ext_resource path="res://assets/raw/tiles/grass.png" type="Texture" id=2]
-[ext_resource path="res://Hex/HexDebug.gd" type="Script" id=3]
-
-
+[ext_resource path="res://actors/Hexes/Hex/Hex.gd" type="Script" id=1]
+[ext_resource path="res://assets/raw/tiles/tilesheet_template.png" type="Texture" id=2]
+[ext_resource path="res://actors/Hexes/Hex/DynamicTile.gd" type="Script" id=3]
+[ext_resource path="res://actors/Hexes/Hex/HexDebug.gd" type="Script" id=4]
 
 [node name="Hex" type="Node2D"]
 
@@ -14,17 +13,26 @@ _sections_unfolded = [ "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
+type = null
 size = Vector2( 12, 10 )
 cube_coords = Vector3( 0, 0, 0 )
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Tile" type="Sprite" parent="." index="0"]
 
 z_index = -1
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Z Index" ]
+region_enabled = true
+region_rect = Rect2( 0, 0, 12, 10 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Region", "Z Index" ]
+tile_id = 0
+tilesheet_cols = 16
+tilesheet_rows = 4
+tile_size = Vector2( 12, 10 )
 
 [node name="Area" type="Area2D" parent="." index="1"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -41,7 +49,7 @@ polygon = PoolVector2Array( -1, -5, 1, -5, 6, -2, 6, 2, 1, 5, -1, 5, -6, 2, -6, 
 [node name="Debug" type="Node2D" parent="." index="2"]
 
 visible = false
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Pause" ]
 
 [connection signal="mouse_entered" from="Area" to="Debug" method="_on_Area_mouse_entered"]
