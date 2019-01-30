@@ -32,15 +32,15 @@ func _ready():
 func add_hex(coords):
 	if (grid.has(coords)):
 		return
-	
+
 	var hex
 	var r = randf()
-	if (r > 0.95):
+	if (r > 1):
 		hex = HexAlien.instance()
-	elif (r > 0.65):
+	elif (r > 1):
+		hex = HexAlien.instance()
+	elif (r > 0.45):
 		hex = HexGrass.instance()
-	elif (r > 0.40):
-		hex = HexSand.instance()
 	else:
 		hex = HexWater.instance()
 	hex.set_cube_coords(coords)
