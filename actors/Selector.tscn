@@ -6,17 +6,17 @@
 [sub_resource type="Animation" id=1]
 
 resource_name = "move"
-length = 1.5
+length = 0.8
 loop = true
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75, 1.5 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -5 ), Vector2( 0, -10 ), Vector2( 0, -5 ) ]
@@ -31,7 +31,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 z_index = 1
 texture = ExtResource( 1 )
-offset = Vector2( 0, -5.33319 )
+offset = Vector2( 0, -6.59504 )
 _sections_unfolded = [ "Offset", "Z Index" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Arrow" index="0"]

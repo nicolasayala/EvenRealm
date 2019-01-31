@@ -36,9 +36,9 @@ func add_hex(coords):
 
 	var hex
 	var r = randf()
-	if (r > 0.95):
+	if (r > 0.975):
 		hex = HexAlien.instance()
-	elif (r > 0.45):
+	elif (r > 0.70):
 		hex = HexGrass.instance()
 	else:
 		hex = HexWater.instance()
@@ -86,6 +86,8 @@ func hex_selected(hex):
 	for h in selected_region:
 		h.set_selected(false)
 	
+	if (hex.type == hex.HEX_TYPE.WATER):
+		return
 	selected_region = flood_fill(hex)
 	for h in selected_region:
 		h.set_selected(true)
