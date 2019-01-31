@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/Hexes/Hex/Hex.gd" type="Script" id=1]
 [ext_resource path="res://assets/raw/tiles/tilesheet_template.png" type="Texture" id=2]
 [ext_resource path="res://actors/Hexes/Hex/DynamicTile.gd" type="Script" id=3]
-[ext_resource path="res://actors/Hexes/Hex/HexDebug.gd" type="Script" id=4]
+[ext_resource path="res://assets/raw/tiles/tilesheet_borders.png" type="Texture" id=4]
+[ext_resource path="res://actors/Hexes/Hex/HexDebug.gd" type="Script" id=5]
 
 [node name="Hex" type="Node2D"]
 
@@ -30,9 +31,21 @@ tilesheet_cols = 16
 tilesheet_rows = 4
 tile_size = Vector2( 12, 10 )
 
-[node name="Area" type="Area2D" parent="." index="1"]
+[node name="Selection" type="Sprite" parent="." index="1"]
 
-editor/display_folded = true
+visible = false
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 12, 10 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Region" ]
+tile_id = 0
+tilesheet_cols = 16
+tilesheet_rows = 4
+tile_size = Vector2( 12, 10 )
+
+[node name="Area" type="Area2D" parent="." index="2"]
+
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -44,13 +57,15 @@ audio_bus_name = "Master"
 [node name="Shape" type="CollisionPolygon2D" parent="Area" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -1, -5, 1, -5, 6, -2, 6, 2, 1, 5, -1, 5, -6, 2, -6, -2 )
+polygon = PoolVector2Array( -1, -4, 1, -4, 5, -2, 5, 2, 1, 4, -1, 4, -5, 2, -5, -2 )
 
-[node name="Debug" type="Node2D" parent="." index="2"]
+[node name="Debug" type="Node2D" parent="." index="3"]
 
 visible = false
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Pause" ]
+
+[connection signal="input_event" from="Area" to="." method="_on_Area_input_event"]
 
 [connection signal="mouse_entered" from="Area" to="Debug" method="_on_Area_mouse_entered"]
 

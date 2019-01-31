@@ -28,7 +28,6 @@ func hex_corner(i):
 func _on_Area_mouse_entered():
 	debug_color = Color(1, 0, 0)
 	z_index = 2
-	print(get_parent().get_cube_coords())
 
 func _on_Area_mouse_exited():
 	debug_color = Color(1, 1, 1)

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal selected
+
 enum HEX_TYPE {
 	VOID,
 	WATER,
@@ -9,6 +11,7 @@ enum HEX_TYPE {
 }
 export (HEX_TYPE) var type = VOID
 var id = 0 setget set_id
+var selected = false setget set_selected
 
 const DIR_E = Vector3(1, -1, 0)
 const DIR_NE = Vector3(1, 0, -1)
@@ -80,3 +83,12 @@ func get_rect(w, h):
 func set_id(n):
 	id = n
 	$Tile.set_tile_id(id)
+	$Selection.set_tile_id(id)
+
+func set_selected(s):
+	selected = s
+	$Selection.visible = selected
+
+func _on_Area_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("hex_select"):
+		emit_signal("selected")

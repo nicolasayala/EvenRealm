@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass.png-e85d8a7614bc18fa3fcd99f02285835c.stex"
+path="res://.import/tilesheet_borders.png-525b0751b3c5de7b116c982d30bf6110.stex"
 
 [deps]
 
-source_file="res://assets/raw/tiles/grass.png"
-dest_files=[ "res://.import/grass.png-e85d8a7614bc18fa3fcd99f02285835c.stex" ]
+source_file="res://assets/raw/tiles/tilesheet_borders.png"
+dest_files=[ "res://.import/tilesheet_borders.png-525b0751b3c5de7b116c982d30bf6110.stex" ]
 
 [params]
 

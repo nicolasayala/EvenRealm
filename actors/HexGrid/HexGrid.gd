@@ -21,6 +21,7 @@ var hex_transform
 var hex_transform_inv
 
 var grid = Dictionary()
+var selected_region = Array()
 
 func _ready():
 	set_hex_scale(hex_scale)
@@ -35,9 +36,7 @@ func add_hex(coords):
 
 	var hex
 	var r = randf()
-	if (r > 1):
-		hex = HexAlien.instance()
-	elif (r > 1):
+	if (r > 0.95):
 		hex = HexAlien.instance()
 	elif (r > 0.45):
 		hex = HexGrass.instance()
@@ -48,6 +47,7 @@ func add_hex(coords):
 	hex.position = get_hex_center(hex)
 	add_child(hex)
 	grid[coords] = hex
+	hex.connect("selected", self, "hex_selected", [hex])
 	return hex
 
 func set_hex_scale(scale):
@@ -80,3 +80,33 @@ func compute_hex_id(hex):
 			id += n
 		n *= 2
 	return id
+
+func hex_selected(hex):
+	for h in selected_region:
+		h.set_selected(false)
+	
+	selected_region = flood_fill(hex)
+	for h in selected_region:
+		h.set_selected(true)
+
+func get_neighbours(hex):
+	var neighbours = Array()
+	for coord in hex.get_adjacents():
+		if grid.has(coord):
+			neighbours.append(grid[coord])
+	return neighbours
+
+func flood_fill(origin_hex):
+	var type = origin_hex.type
+	var queue = Array()
+	var visited = Array()
+	visited.push_back(origin_hex)
+	queue.push_back(origin_hex)
+	while !queue.empty():
+		var hex = queue.front()
+		queue.pop_front()
+		for other in get_neighbours(hex):
+			if other.type == type && !visited.has(other):
+				visited.push_back(other)
+				queue.push_back(other)
+	return visited
