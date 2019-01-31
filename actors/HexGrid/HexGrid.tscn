@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/HexGrid/HexGrid.gd" type="Script" id=1]
 [ext_resource path="res://actors/Hexes/HexVoid.tscn" type="PackedScene" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://actors/Hexes/HexWater.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/Hexes/HexSand.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/Hexes/HexAlien.tscn" type="PackedScene" id=6]
+[ext_resource path="res://actors/Selector.tscn" type="PackedScene" id=7]
 
-[node name="HexGrid" type="Node2D" index="0"]
+[node name="HexGrid" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -18,5 +19,7 @@ HexSand = ExtResource( 5 )
 HexAlien = ExtResource( 6 )
 hex_scale = 1.0
 base_hex_size = Vector2( 12, 10 )
+
+[node name="Selector" parent="." index="0" instance=ExtResource( 7 )]
 
 

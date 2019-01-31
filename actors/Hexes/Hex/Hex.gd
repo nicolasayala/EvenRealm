@@ -1,6 +1,7 @@
 extends Node2D
 
 signal selected
+signal hover
 
 enum HEX_TYPE {
 	VOID,
@@ -92,3 +93,6 @@ func set_selected(s):
 func _on_Area_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("hex_select"):
 		emit_signal("selected")
+
+func _on_Area_mouse_entered():
+	emit_signal("hover")

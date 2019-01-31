@@ -48,6 +48,7 @@ func add_hex(coords):
 	add_child(hex)
 	grid[coords] = hex
 	hex.connect("selected", self, "hex_selected", [hex])
+	hex.connect("hover", self, "hex_hover", [hex])
 	return hex
 
 func set_hex_scale(scale):
@@ -110,3 +111,6 @@ func flood_fill(origin_hex):
 				visited.push_back(other)
 				queue.push_back(other)
 	return visited
+
+func hex_hover(hex):
+	$Selector.position = hex.position
