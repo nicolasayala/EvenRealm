@@ -1,118 +1,78 @@
 extends Node2D
 
-export (PackedScene) var HexVoid
-export (PackedScene) var HexGrass
-export (PackedScene) var HexWater
-export (PackedScene) var HexSand
-export (PackedScene) var HexAlien
+signal node_hovered(node)
+signal node_selected(node)
 
-const DIR_E = Vector3(1, -1, 0)
-const DIR_NE = Vector3(1, 0, -1)
-const DIR_NW = Vector3(0, 1, -1)
-const DIR_W = Vector3(-1, 1, 0)
-const DIR_SW = Vector3(-1, 0, 1)
-const DIR_SE = Vector3(0, -1, 1)
-const DIR_ALL = [DIR_E, DIR_NE, DIR_NW, DIR_W, DIR_SW, DIR_SE]
-
-export(float) var hex_scale = 1.0
-export(Vector2) var base_hex_size = Vector2(12, 10)
-var hex_size
-var hex_transform
-var hex_transform_inv
+export(Vector2) var node_size = Vector2(12, 10)
+var node_transform
 
 var grid = Dictionary()
-var selected_region = Array()
 
 func _ready():
-	set_hex_scale(hex_scale)
-	var hex = add_hex(Vector3(0, 0, 0))
-	for coord in hex.get_rect(50, 48): ##fullscreen 50/48
-		add_hex(coord)
-	update_hexes_tiles()
-
-func add_hex(coords):
-	if (grid.has(coords)):
-		return
-
-	var hex
-	var r = randf()
-	if (r > 0.975):
-		hex = HexAlien.instance()
-	elif (r > 0.70):
-		hex = HexGrass.instance()
-	else:
-		hex = HexWater.instance()
-	hex.set_cube_coords(coords)
-	hex.size = hex_size
-	hex.position = get_hex_center(hex)
-	add_child(hex)
-	grid[coords] = hex
-	hex.connect("selected", self, "hex_selected", [hex])
-	hex.connect("hover", self, "hex_hover", [hex])
-	return hex
-
-func set_hex_scale(scale):
-	hex_scale = scale
-	hex_size = base_hex_size * hex_scale
-	hex_transform = Transform2D(
-		Vector2(hex_size.x, 0),
-		Vector2(hex_size.x / 2, int(0.7 * hex_size.y)),
+	node_transform = Transform2D(
+		Vector2(node_size.x, 0),
+		Vector2(node_size.x / 2, int(0.7 * node_size.y)),
 		Vector2(0, 0)
 	)
-	hex_transform_inv = hex_transform.affine_inverse()
 
-func get_hex_center(hex):
-	return hex_transform * hex.axial_coords
+func add_node(hex, scene):
+	if (grid.has(hex)):
+		return
+	var node = scene.instance()
+	
+	node.hex = hex
+	node.position = get_node_center(hex)
+	add_child(node)
+	grid[hex] = node
+	node.connect("selected", self, "_node_selected", [node])
+	node.connect("hover", self, "_node_hovered", [node])
 
-func update_hexes_tiles():
-	for hex in grid.values():
-		hex.set_id(compute_hex_id(hex))
+func get_node_center(hex):
+	return node_transform * Hex.axial(hex)
 
-func compute_hex_id(hex):
+func update_nodes():
+	for node in grid.values():
+		node.set_id(compute_node_id(node))
+
+func compute_node_id(node):
+	var hex = node.hex
 	var id = 0
 	var n = 1
-	var hex_type = hex.type
-	for coord in hex.get_adjacents():
-		if grid.has(coord):
-			var other_type = grid[coord].type
-			if other_type != hex_type :
+	var node_type = node.type
+	for other in Hex.neighbours(hex):
+		if grid.has(other):
+			var other_type = grid[other].type
+			if other_type != node_type :
 				id += n
 		else:
 			id += n
 		n *= 2
 	return id
 
-func hex_selected(hex):
-	for h in selected_region:
-		h.set_selected(false)
-	
-	if (hex.type == hex.HEX_TYPE.WATER):
-		return
-	selected_region = flood_fill(hex)
-	for h in selected_region:
-		h.set_selected(true)
+func get_neighbours(node):
+	var nodes = Array()
+	for hex in Hex.neighbours(node.hex):
+		if grid.has(hex):
+			nodes.append(grid[hex])
+	return nodes
 
-func get_neighbours(hex):
-	var neighbours = Array()
-	for coord in hex.get_adjacents():
-		if grid.has(coord):
-			neighbours.append(grid[coord])
-	return neighbours
-
-func flood_fill(origin_hex):
-	var type = origin_hex.type
+func flood_fill(node):
+	var node_type = node.type
 	var queue = Array()
 	var visited = Array()
-	visited.push_back(origin_hex)
-	queue.push_back(origin_hex)
+	visited.push_back(node)
+	queue.push_back(node)
 	while !queue.empty():
-		var hex = queue.front()
+		var n = queue.front()
 		queue.pop_front()
-		for other in get_neighbours(hex):
-			if other.type == type && !visited.has(other):
+		for other in get_neighbours(n):
+			if other.type == node_type && !visited.has(other):
 				visited.push_back(other)
 				queue.push_back(other)
 	return visited
 
-func hex_hover(hex):
-	$Selector.position = hex.position
+func _node_selected(node):
+	emit_signal("node_selected", node)
+
+func _node_hovered(node):
+	emit_signal("node_hovered", node)

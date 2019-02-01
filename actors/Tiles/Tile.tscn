@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://actors/Hexes/Hex/Hex.gd" type="Script" id=1]
+[ext_resource path="res://actors/Tiles/Tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/raw/tiles/tilesheet_template.png" type="Texture" id=2]
-[ext_resource path="res://actors/Hexes/Hex/DynamicTile.gd" type="Script" id=3]
+[ext_resource path="res://actors/Tiles/DynamicSprite.gd" type="Script" id=3]
 [ext_resource path="res://assets/raw/tiles/tilesheet_borders.png" type="Texture" id=4]
-[ext_resource path="res://actors/Hexes/Hex/HexDebug.gd" type="Script" id=5]
 
-[node name="Hex" type="Node2D"]
+[node name="Tile" type="Node2D" index="0"]
 
 z_index = 1
 script = ExtResource( 1 )
@@ -15,10 +14,8 @@ __meta__ = {
 "_edit_group_": true
 }
 type = null
-size = Vector2( 12, 10 )
-cube_coords = Vector3( 0, 0, 0 )
 
-[node name="Tile" type="Sprite" parent="." index="0"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
 z_index = -1
 texture = ExtResource( 2 )
@@ -31,7 +28,7 @@ tilesheet_cols = 16
 tilesheet_rows = 4
 tile_size = Vector2( 12, 10 )
 
-[node name="Selection" type="Sprite" parent="." index="1"]
+[node name="Borders" type="Sprite" parent="." index="1"]
 
 visible = false
 texture = ExtResource( 4 )
@@ -59,18 +56,8 @@ audio_bus_name = "Master"
 build_mode = 0
 polygon = PoolVector2Array( -1, -5, 1, -5, 6, -2, 6, 2, 1, 5, -1, 5, -6, 2, -6, -2 )
 
-[node name="Debug" type="Node2D" parent="." index="3"]
-
-visible = false
-script = ExtResource( 5 )
-_sections_unfolded = [ "Pause" ]
-
 [connection signal="input_event" from="Area" to="." method="_on_Area_input_event"]
 
 [connection signal="mouse_entered" from="Area" to="." method="_on_Area_mouse_entered"]
-
-[connection signal="mouse_entered" from="Area" to="Debug" method="_on_Area_mouse_entered"]
-
-[connection signal="mouse_exited" from="Area" to="Debug" method="_on_Area_mouse_exited"]
 
 
