@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -5 ), Vector2( 0, -10 ), Vector2( 0, -5 ) ]
 }
 
-[node name="Selector" type="Node2D" index="0"]
+[node name="Selector" type="Node2D"]
 
 z_index = 2
 _sections_unfolded = [ "Transform", "Z Index" ]
