@@ -1,9 +1,8 @@
 extends Node2D
 
-signal node_input_event(node, event)
-
 export(Vector2) var node_size = Vector2(12, 10)
 var node_transform
+var node_transform_inv
 
 var grid = Dictionary()
 
@@ -16,29 +15,33 @@ func _ready():
 		Vector2(node_size.x / 2, int(0.7 * node_size.y)),
 		Vector2(0, 0)
 	)
+	node_transform_inv = node_transform.affine_inverse()
 
-func add_node(node, callback=null):
+func clear():
+	for node in grid.values():
+		node.queue_free()
+	grid = Dictionary()
+
+var i = 0
+func add_node(node):
 	var hex = node.hex
 	if (hex == null):
 		printerr("Can't add node with null hex")
-		return 
+		return false
 	if (grid.has(hex)):
 		printerr("GridMap already has node at " + str(hex))
-		return
-	add_child(node)
+		return false
 	grid[hex] = node
 	node.position = get_node_center(hex)
-	node.connect("input_event", self, "_node_input_event", [node])
 	for other in get_neighbours(node):
 		var dir = Hex.get_dir_between(node.hex, other.hex)
 		node.set_neighbour(other, dir)
-	if (callback):
-		callback.call_func()
+	return true
 
 func remove_node(node):
 	if (!grid.has(node.hex)):
 		return
-	remove_child(grid[node.hex])
+	grid[node.hex].queue_free()
 	grid.erase(node.hex)
 
 func get_node_center(hex):
@@ -67,5 +70,8 @@ func get_neighbours(node, with_nulls=false):
 #				queue.push_back(other)
 #	return visited
 
-func _node_input_event(event, node):
-	emit_signal("node_input_event", event, node)
+func _input(event):
+	var mouse_local = get_local_mouse_position();
+	var hex = Hex.round(Hex.cube(node_transform_inv * mouse_local))
+	if grid.has(hex):
+		grid[hex].input_event(event)

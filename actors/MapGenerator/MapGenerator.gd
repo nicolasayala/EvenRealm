@@ -9,10 +9,11 @@ export (PackedScene) var WaterTile
 export (PackedScene) var AlienTile
 
 export(bool) var gen_on_load = false
-export(int) var tiles_per_tick = 1
+export(int, 1, 100) var tiles_per_tick = 1
 
 var hexes
 var generating = false
+var start_time = 0
 
 func _ready():
 	set_process(false)
@@ -24,7 +25,7 @@ func _process(delta):
 		generating = !hexes.empty()
 		if (!generating):
 			set_process(false)
-			print("Done generating !")
+			print("Done generating ! " + str(OS.get_ticks_msec() - start_time) + "ms")
 			emit_signal("generation_end")
 			return
 		gen_tile(hexes.front())
@@ -33,11 +34,10 @@ func _process(delta):
 func start():
 	if generating:
 		return
+	start_time = OS.get_ticks_msec()
 	generating = true
 	set_process(true)
 	hexes = Hex.rect(Vector3(0, 0, 0), 50, 48)
-	if tiles_per_tick == 0:
-		tiles_per_tick = hexes.size()
 	print("Generating " + str(hexes.size()) + " tiles...")
 
 func gen_tile(hex):

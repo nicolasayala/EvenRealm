@@ -38,6 +38,9 @@ static func get_opposite_dir(dir):
 static func axial(hex):
 	return Vector2(hex.x, hex.z)
 
+static func cube(axial):
+	return Vector3(axial.x, -axial.x - axial.y, axial.y)
+
 static func neighbour(hex, dir):
 	return hex + OFFSETS[dir]
 
@@ -56,10 +59,21 @@ static func circle(hex, r):
 
 static func rect(hex, w, h):
 	var hexes = Array()
-	for q in range(- w / 2, w / 2 + 1):
-		for r in range(- h / 2, h / 2 + 1):
+	for r in range(- h / 2, h / 2 + 1):
+		for q in range(- w / 2, w / 2 + 1):
 			hexes.append(hex + hex(Vector2(q - ceil(r / 2.0), r)))
 	return hexes
+
+func round(hex):
+	var rounded = Vector3(round(hex.x), round(hex.y), round(hex.z))
+	var diffs = (rounded - hex).abs()
+	if diffs.x > diffs.y and diffs.x > diffs.z:
+		rounded.x = -rounded.y - rounded.z
+	elif diffs.y > diffs.z:
+		rounded.y = -rounded.x - rounded.z
+	else:
+		rounded.z = -rounded.x - rounded.y
+	return rounded
 
 static func distance(hex_a, hex_b):
 	return (abs(hex_b.x - hex_a.x) + abs(hex_b.y - hex_a.y) + abs(hex_b.z - hex_a.z))

@@ -2,14 +2,12 @@ extends "res://actors/HexGrid/HexGridNode.gd"
 
 var Territory = load("res://classes/Territory.gd")
 
-signal input_event(event)
-
 var TEXTURES = [
 	null,
-	load("res://assets/raw/tiles/tilesheet_water.png"),
-	load("res://assets/raw/tiles/tilesheet_grass.png"),
-	load("res://assets/raw/tiles/tilesheet_sand.png"),
-	load("res://assets/raw/tiles/tilesheet_alien.png")
+	preload("res://assets/raw/tiles/tilesheet_water.png"),
+	preload("res://assets/raw/tiles/tilesheet_grass.png"),
+	preload("res://assets/raw/tiles/tilesheet_sand.png"),
+	preload("res://assets/raw/tiles/tilesheet_alien.png")
 ]
 
 enum TILE_TYPE {
@@ -26,13 +24,15 @@ var selected = false setget set_selected
 var territory
 
 func _ready():
-	Territory.new().add(self)
+	var t = Territory.new(self.type)
+	t.add(self)
+	t.set_name("Territory")
+	add_child(t)
 
 func set_neighbour(tile, dir):
 	.set_neighbour(tile, dir)
-	if (tile):
-		if (self.type == tile.type):
-			tile.territory.merge_with(self.territory)
+	if (self.type == tile.type):
+		tile.territory.merge_with(self.territory)
 	update_id()
 	tile.update_id()
 
@@ -62,11 +62,11 @@ func initialize():
 
 func set_selected(value):
 	selected = value
-#	if (value):
-#		$Sprite.modulate = Color(0.1, 0.1, 0.1)
-#	else:
-#		$Sprite.modulate = Color(1, 1, 1)
-	$Borders.visible = value
+	if (value):
+		$Sprite.modulate = Color(0.1, 0.1, 0.1)
+	else:
+		$Sprite.modulate = Color(1, 1, 1)
+#	$Borders.visible = value
 
 func set_type(t):
 	type = t

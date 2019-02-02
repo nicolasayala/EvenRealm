@@ -1,3 +1,5 @@
+extends Node
+
 signal changed
 signal selected
 
@@ -5,14 +7,10 @@ var tiles = Array()
 var selected = true
 var type
 
-func _init():
-	pass
+func _init(t):
+	type = t
 
 func add(tile):
-	if (tiles.has(tile)):
-		return
-	if (!type):
-		type = tile.type
 	tile.territory = self
 	tiles.append(tile)
 
@@ -23,14 +21,16 @@ func remove(tile):
 func merge_with(territory):
 	if (territory == self):
 		return
-	for tile in territory.tiles:
-		add(tile)
+	if (self.size() >= territory.size()):
+		for tile in territory.tiles:
+			add(tile)
+	else:
+		territory.merge_with(self)
 
 func grow(tile):
 	if (tile.territory):
 		tile.territory.remove(tile)
 	add(tile)
-	print("setting type to " + str(self.type))
 	tile.set_type(self.type)
 
 func set_selected(value):
@@ -39,3 +39,6 @@ func set_selected(value):
 
 func has(tile):
 	return tiles.has(tile)
+
+func size():
+	return tiles.size()

@@ -1,23 +1,28 @@
 extends Node2D
 
+var Territory = load("res://classes/Territory.gd")
+
 export(bool) var locked_on_load = true
 
-var Territory = load("res://classes/Territory.gd")
-var selected_territory = Territory.new()
+var selected_territory = null
 var locked = true setget set_locked
 
 func _ready():
 	if locked_on_load:
 		locked = true
 
+func clear():
+	$HexGrid.clear()
+	selected_territory = null
+	locked = locked_on_load
+
 func set_locked(value):
 	locked = value
 
 func add_tile(tile):
-	$HexGrid.add_node(tile, funcref(tile, "initialize"))
-
-func select_tile(tile):
-	$HexGrid/Selector.position = tile.position
+	$Territories.add_child(tile)
+	tile.connect("input_event", self, "_on_tile_input_event", [tile])
+	$HexGrid.add_node(tile)
 
 func select_territory(tile):
 	if (!tile.territory):
@@ -28,7 +33,7 @@ func select_territory(tile):
 	selected_territory = tile.territory
 	tile.territory.set_selected(true)
 
-func _on_HexGrid_node_input_event(event, tile):
+func _on_tile_input_event(event, tile):
 	if (locked):
 		return
 
@@ -38,6 +43,3 @@ func _on_HexGrid_node_input_event(event, tile):
 		for neighbour in tile.get_neighbours():
 			if (neighbour.type == neighbour.TILE_TYPE.ALIEN):
 				neighbour.territory.grow(tile)
-				print("grow")
-	elif event is InputEventMouseMotion:
-		select_tile(tile)
