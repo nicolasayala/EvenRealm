@@ -10,7 +10,7 @@ var TEXTURES = [
 	preload("res://assets/raw/tiles/tilesheet_alien.png")
 ]
 
-enum TILE_TYPE {
+enum TYPE {
 	VOID,
 	WATER,
 	GRASS,
@@ -18,23 +18,24 @@ enum TILE_TYPE {
 	ALIEN
 }
 
-export (TILE_TYPE) var type = VOID setget set_type
+export (TYPE) var type = VOID setget set_type
+export (bool) var gen_territory = true
 var id = 0 setget set_id
 var selected = false setget set_selected
-var territory
-
-func _ready():
-	var t = Territory.new(self.type)
-	t.add(self)
-	t.set_name("Territory")
-	add_child(t)
 
 func set_neighbour(tile, dir):
 	.set_neighbour(tile, dir)
 	if (self.type == tile.type):
-		tile.territory.merge_with(self.territory)
+		if (self.has_territory() and tile.has_territory()):
+			tile.get_territory().merge_with(self.get_territory())
 	update_id()
 	tile.update_id()
+
+func get_territory():
+	return get_parent()
+
+func has_territory():
+	return gen_territory
 
 func set_id(n):
 	id = n
@@ -54,19 +55,13 @@ func update_id():
 		n *= 2
 	set_id(id)
 
-func update_territory():
-	pass
-
-func initialize():
-	pass
-
 func set_selected(value):
 	selected = value
-	if (value):
-		$Sprite.modulate = Color(0.1, 0.1, 0.1)
-	else:
-		$Sprite.modulate = Color(1, 1, 1)
-#	$Borders.visible = value
+#	if (value):
+#		$Sprite.modulate = Color(0.1, 0.1, 0.1)
+#	else:
+#		$Sprite.modulate = Color(1, 1, 1)
+	$Borders.visible = value
 
 func set_type(t):
 	type = t

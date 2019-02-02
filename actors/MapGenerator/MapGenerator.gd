@@ -9,7 +9,7 @@ export (PackedScene) var WaterTile
 export (PackedScene) var AlienTile
 
 export(bool) var gen_on_load = false
-export(int, 1, 100) var tiles_per_tick = 1
+export(int, 0, 100) var tiles_per_tick = 1
 
 var hexes
 var generating = false
@@ -38,6 +38,8 @@ func start():
 	generating = true
 	set_process(true)
 	hexes = Hex.rect(Vector3(0, 0, 0), 50, 48)
+	if tiles_per_tick == 0:
+		tiles_per_tick = hexes.size()
 	print("Generating " + str(hexes.size()) + " tiles...")
 
 func gen_tile(hex):

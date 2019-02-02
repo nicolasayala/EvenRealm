@@ -1,44 +1,67 @@
-extends Node
+extends Node2D
 
-signal changed
 signal selected
 
-var tiles = Array()
-var selected = true
+enum TYPE {
+	PLAYER,
+	IA	
+}
+
 var type
+var selected
 
-func _init(t):
-	type = t
+func _init(tile):
+	if tile.type == tile.TYPE.ALIEN:
+		type = PLAYER
+	else:
+		type = IA
+	add_tile(tile)
 
-func add(tile):
-	tile.territory = self
-	tiles.append(tile)
-
-func remove(tile):
-	tile.territory = null
-	tiles.erase(tile)
+func add_tile(tile):
+	add_child(tile)
+	tile.connect("input_event", self, "on_tile_input_event", [tile])
 
 func merge_with(territory):
 	if (territory == self):
 		return
 	if (self.size() >= territory.size()):
-		for tile in territory.tiles:
-			add(tile)
+		for tile in territory.get_tiles():
+			tile.get_parent().remove_child(tile)
+			add_tile(tile)
+			territory.queue_free()
 	else:
 		territory.merge_with(self)
 
 func grow(tile):
-	if (tile.territory):
-		tile.territory.remove(tile)
-	add(tile)
-	tile.set_type(self.type)
+	tile.get_parent().remove_child(tile)
+	add_tile(tile)
+	tile.set_type(tile.TYPE.ALIEN)
+	if (selected):
+		set_selected(true)
 
 func set_selected(value):
-	for tile in tiles:
+	selected = value
+	for tile in get_tiles():
 		tile.set_selected(value)
 
 func has(tile):
-	return tiles.has(tile)
+	return get_tiles().has(tile)
 
 func size():
-	return tiles.size()
+	return get_tiles().size()
+
+func get_tiles():
+	return get_children()
+
+func on_tile_input_event(event, tile):
+	if event.is_action_pressed("territory_select"):
+		emit_signal("selected")
+
+func is_neighbour(tile):
+	var tiles = get_tiles()
+	if (tiles.has(tile)):
+		return false
+	for neighbour in tile.get_neighbours():
+		if tiles.has(neighbour):
+			return true
+	return false
