@@ -1,28 +1,50 @@
 extends Node
 
-const DIR_E = Vector3(1, -1, 0)
-const DIR_NE = Vector3(1, 0, -1)
-const DIR_NW = Vector3(0, 1, -1)
-const DIR_W = Vector3(-1, 1, 0)
-const DIR_SW = Vector3(-1, 0, 1)
-const DIR_SE = Vector3(0, -1, 1)
-const DIR_ALL = [DIR_E, DIR_NE, DIR_NW, DIR_W, DIR_SW, DIR_SE]
+enum DIR {
+	DIR_E,
+	DIR_NE,
+	DIR_NW,
+	DIR_W,
+	DIR_SW,
+	DIR_SE
+}
+
+const OFFSETS = [
+	Vector3(1, -1, 0),
+	Vector3(1, 0, -1), 
+	Vector3(0, 1, -1), 
+	Vector3(-1, 1, 0), 
+	Vector3(-1, 0, 1), 
+	Vector3(0, -1, 1)
+]
 
 static func hex(axial):
 	var x = axial.x
 	var z = axial.y
 	return Vector3(x, -x - z, z)
 
+static func get_dir_between(hex_a, hex_b):
+	return get_dir(hex_b - hex_a)
+
+static func get_dir(offset):
+	var dir = OFFSETS.find(offset)
+	if dir == -1:
+		printerr(str(offset) + " isn't a valid direction")
+	return dir
+
+static func get_opposite_dir(dir):
+	return (dir + 3) % 6
+
 static func axial(hex):
 	return Vector2(hex.x, hex.z)
 
 static func neighbour(hex, dir):
-	return hex + dir
+	return hex + OFFSETS[dir]
 
 static func neighbours(hex):
 	var hexes = Array()
-	for dir in DIR_ALL:
-		hexes.append(hex + dir)
+	for offset in OFFSETS:
+		hexes.append(hex + offset)
 	return hexes
 
 static func circle(hex, r):
@@ -38,3 +60,6 @@ static func rect(hex, w, h):
 		for r in range(- h / 2, h / 2 + 1):
 			hexes.append(hex + hex(Vector2(q - ceil(r / 2.0), r)))
 	return hexes
+
+static func distance(hex_a, hex_b):
+	return (abs(hex_b.x - hex_a.x) + abs(hex_b.y - hex_a.y) + abs(hex_b.z - hex_a.z))

@@ -1,38 +1,43 @@
 extends Node2D
 
-export (PackedScene) var VoidTile
-export (PackedScene) var GrassTile
-export (PackedScene) var WaterTile
-export (PackedScene) var AlienTile
+export(bool) var locked_on_load = true
 
-var selected_region = Array()
+var Territory = load("res://classes/Territory.gd")
+var selected_territory = Territory.new()
+var locked = true setget set_locked
 
 func _ready():
-	spawn_tiles()
+	if locked_on_load:
+		locked = true
 
-func spawn_tiles():
-	for hex in Hex.rect(Vector3(0, 0, 0), 50, 48): ##fullscreen 50/48
-		var r = randf()
-		var node
-		if (r > 0.975):
-			node = AlienTile
-		elif (r > 0.70):
-			node = GrassTile
-		else:
-			node = WaterTile
-		$HexGrid.add_node(hex, node)
-	$HexGrid.update_nodes()
+func set_locked(value):
+	locked = value
 
-func _on_HexGrid_node_hovered(node):
-	$HexGrid/Selector.position = node.position
+func add_tile(tile):
+	$HexGrid.add_node(tile, funcref(tile, "initialize"))
 
-func _on_HexGrid_node_selected(node):
-	for node in selected_region:
-		node.set_selected(false)
-	
-	if (node.type == node.TILE_TYPE.WATER):
+func select_tile(tile):
+	$HexGrid/Selector.position = tile.position
+
+func select_territory(tile):
+	if (!tile.territory):
 		return
-	selected_region = $HexGrid.flood_fill(node)
-	for other in selected_region:
-		other.set_selected(true)
 
+	if (selected_territory):
+		selected_territory.set_selected(false)
+	selected_territory = tile.territory
+	tile.territory.set_selected(true)
+
+func _on_HexGrid_node_input_event(event, tile):
+	if (locked):
+		return
+
+	if event.is_action_pressed("tile_select"):
+		select_territory(tile)
+	elif event.is_action_pressed("territory_expand"):
+		for neighbour in tile.get_neighbours():
+			if (neighbour.type == neighbour.TILE_TYPE.ALIEN):
+				neighbour.territory.grow(tile)
+				print("grow")
+	elif event is InputEventMouseMotion:
+		select_tile(tile)

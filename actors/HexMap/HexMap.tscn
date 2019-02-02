@@ -1,32 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://actors/HexMap/HexMap.gd" type="Script" id=1]
-[ext_resource path="res://actors/Tiles/VoidTile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/Tiles/GrassTile.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/Tiles/WaterTile.tscn" type="PackedScene" id=4]
-[ext_resource path="res://actors/Tiles/AlienTile.tscn" type="PackedScene" id=5]
-[ext_resource path="res://actors/HexGrid/HexGrid.gd" type="Script" id=6]
-[ext_resource path="res://actors/HexMap/Selector.tscn" type="PackedScene" id=7]
+[ext_resource path="res://actors/HexGrid/HexGrid.gd" type="Script" id=2]
+[ext_resource path="res://actors/HexMap/Selector.tscn" type="PackedScene" id=3]
 
-[node name="HexMap" type="Node2D" index="0"]
+[node name="HexMap" type="Node2D"]
 
 position = Vector2( 320, 180 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-VoidTile = ExtResource( 2 )
-GrassTile = ExtResource( 3 )
-WaterTile = ExtResource( 4 )
-AlienTile = ExtResource( 5 )
+locked_on_load = true
 
 [node name="HexGrid" type="Node2D" parent="." index="0"]
 
-script = ExtResource( 6 )
+script = ExtResource( 2 )
 node_size = Vector2( 12, 10 )
 
-[node name="Selector" parent="HexGrid" index="0" instance=ExtResource( 7 )]
+[node name="Selector" parent="HexGrid" index="0" instance=ExtResource( 3 )]
 
-[connection signal="node_hovered" from="HexGrid" to="." method="_on_HexGrid_node_hovered"]
+visible = false
 
-[connection signal="node_selected" from="HexGrid" to="." method="_on_HexGrid_node_selected"]
+[connection signal="node_input_event" from="HexGrid" to="." method="_on_HexGrid_node_input_event"]
 
 
