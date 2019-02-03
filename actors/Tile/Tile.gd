@@ -9,6 +9,7 @@ var TEXTURES = [
 	preload("res://assets/raw/tiles/tilesheet_sand.png"),
 	preload("res://assets/raw/tiles/tilesheet_alien.png")
 ]
+var tree = preload("res://assets/raw/trees.png")
 
 enum TYPE {
 	VOID,
@@ -23,6 +24,11 @@ export (bool) var gen_territory = true
 var id = 0 setget set_id
 var selected = false setget set_selected
 
+func _ready():
+	update_sprite()
+	update_sprite_id()
+
+# Override
 func set_neighbour(tile, dir):
 	.set_neighbour(tile, dir)
 	if (self.type == tile.type):
@@ -40,8 +46,16 @@ func has_territory():
 func set_id(n):
 	id = n
 	if (is_inside_tree()):
-		$Sprite.set_tile_id(id)
-		$Borders.set_tile_id(id)
+		update_sprite_id()
+
+func set_type(t):
+	type = t
+	for tile in self.get_neighbours():
+		tile.update_id()
+	self.update_id()
+	
+	if (is_inside_tree()):
+		update_sprite()
 
 func update_id():
 	var id = 0
@@ -63,14 +77,11 @@ func set_selected(value):
 #		$Sprite.modulate = Color(1, 1, 1)
 	$Borders.visible = value
 
-func set_type(t):
-	type = t
-	if (is_inside_tree()):
-		$Sprite.texture = TEXTURES[type]
-	for tile in self.get_neighbours():
-		tile.update_id()
-	self.update_id()
+func update_sprite():
+	if type == TYPE.GRASS and randf() > 0.90:
+		$Top.texture = tree
+	$Sprite.texture = TEXTURES[type]
 
-func _on_Area_input_event(viewport, event, shape_idx):
-	emit_signal("input_event", event)
-
+func update_sprite_id():
+	$Sprite.set_tile_id(id)
+	$Borders.set_tile_id(id)

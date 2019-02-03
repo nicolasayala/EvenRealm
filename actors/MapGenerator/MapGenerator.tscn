@@ -1,20 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://actors/MapGenerator/MapGenerator.gd" type="Script" id=1]
-[ext_resource path="res://actors/Tiles/VoidTile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/Tiles/GrassTile.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/Tiles/WaterTile.tscn" type="PackedScene" id=4]
-[ext_resource path="res://actors/Tiles/AlienTile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/Tile/Tile.tscn" type="PackedScene" id=2]
 
-[node name="MapGenerator" type="Node" index="0"]
+[node name="MapGenerator" type="Node"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-VoidTile = ExtResource( 2 )
-GrassTile = ExtResource( 3 )
-WaterTile = ExtResource( 4 )
-AlienTile = ExtResource( 5 )
+Tile = ExtResource( 2 )
 gen_on_load = true
-tiles_per_tick = 1
+tiles_per_tick = 0
 
 

@@ -3,10 +3,7 @@ extends Node
 signal generation_end()
 signal tile_generated(tile)
 
-export (PackedScene) var VoidTile
-export (PackedScene) var GrassTile
-export (PackedScene) var WaterTile
-export (PackedScene) var AlienTile
+export (PackedScene) var Tile
 
 export(bool) var gen_on_load = false
 export(int, 0, 100) var tiles_per_tick = 1
@@ -44,12 +41,12 @@ func start():
 
 func gen_tile(hex):
 	var r = randf()
-	var tile
+	var tile = Tile.instance()
 	if hex == Vector3(0, 0, 0):
-		tile = AlienTile.instance()
+		tile.set_type(tile.TYPE.ALIEN)
 	elif (r > Hex.distance(Vector3(0, 0, 0), hex) / 45):
-		tile = GrassTile.instance()
+		tile.set_type(tile.TYPE.GRASS)
 	else:
-		tile = WaterTile.instance()
+		tile.set_type(tile.TYPE.WATER)
 	tile.hex = hex
 	emit_signal("tile_generated", tile)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://actors/Tiles/Tile.gd" type="Script" id=1]
+[ext_resource path="res://actors/Tile/Tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/raw/tiles/tilesheet_template.png" type="Texture" id=2]
-[ext_resource path="res://actors/Tiles/DynamicSprite.gd" type="Script" id=3]
+[ext_resource path="res://actors/Tile/DynamicSprite.gd" type="Script" id=3]
 [ext_resource path="res://assets/raw/tiles/tilesheet_borders.png" type="Texture" id=4]
 
 [node name="Tile" type="Node2D"]
@@ -13,7 +13,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 __meta__ = {
 "_edit_group_": true
 }
-type = null
+type = 0
 gen_territory = true
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
@@ -41,5 +41,7 @@ tile_id = 0
 tilesheet_cols = 16
 tilesheet_rows = 4
 tile_size = Vector2( 12, 10 )
+
+[node name="Top" type="Sprite" parent="." index="2"]
 
 
