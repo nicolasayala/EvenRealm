@@ -9,8 +9,11 @@ I'm a developer not an artist, all the art used is heavily inspired by the game 
 * Hexagonal map
 	* Dynamic tiles
 	* Multiple biomes
+* Territories
 	* Territory selection
+	* Territory growth
+	* Player and AI territories
 
-![hex grid](https://i.ibb.co/Wp4vygc/Capture-d-cran-de-2019-01-31-10-29-26.png")
+![enhanced sprites](https://i.ibb.co/6HWD7xr/Capture-d-cran-de-2019-02-03-12-40-15.png")
 
 * Some UIs
