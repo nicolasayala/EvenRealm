@@ -70,7 +70,7 @@ func get_neighbours(node, with_nulls=false):
 #				queue.push_back(other)
 #	return visited
 
-func _input(event):
+func _unhandled_input(event):
 	var mouse_local = get_local_mouse_position();
 	var hex = Hex.round(Hex.cube(node_transform_inv * mouse_local))
 	if grid.has(hex):

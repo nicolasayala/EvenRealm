@@ -4,7 +4,8 @@ signal selected
 
 enum TYPE {
 	PLAYER,
-	IA	
+	IA,
+	NONE	
 }
 
 var type
@@ -13,6 +14,8 @@ var selected
 func _init(tile):
 	if tile.type == tile.TYPE.ALIEN:
 		type = PLAYER
+	elif tile.type == tile.TYPE.WATER:
+		type = NONE
 	else:
 		type = IA
 	add_tile(tile)

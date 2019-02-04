@@ -20,7 +20,6 @@ enum TYPE {
 }
 
 export (TYPE) var type = VOID setget set_type
-export (bool) var gen_territory = true
 var id = 0 setget set_id
 var selected = false setget set_selected
 
@@ -32,16 +31,12 @@ func _ready():
 func set_neighbour(tile, dir):
 	.set_neighbour(tile, dir)
 	if (self.type == tile.type):
-		if (self.has_territory() and tile.has_territory()):
-			tile.get_territory().merge_with(self.get_territory())
+		tile.get_territory().merge_with(self.get_territory())
 	update_id()
 	tile.update_id()
 
 func get_territory():
 	return get_parent()
-
-func has_territory():
-	return gen_territory
 
 func set_id(n):
 	id = n
@@ -71,15 +66,9 @@ func update_id():
 
 func set_selected(value):
 	selected = value
-#	if (value):
-#		$Sprite.modulate = Color(0.1, 0.1, 0.1)
-#	else:
-#		$Sprite.modulate = Color(1, 1, 1)
 	$Borders.visible = value
 
 func update_sprite():
-	if type == TYPE.GRASS and randf() > 0.90:
-		$Top.texture = tree
 	$Sprite.texture = TEXTURES[type]
 
 func update_sprite_id():

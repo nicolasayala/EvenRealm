@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/TerritoryManager/TerritoryManager.gd" type="Script" id=1]
+[ext_resource path="res://actors/TerritoryManager/Selector.tscn" type="PackedScene" id=2]
+
+[node name="TerritoryManager" type="Node2D"]
+
+script = ExtResource( 1 )
+locked_on_load = true
+
+[node name="Selector" parent="." index="0" instance=ExtResource( 2 )]
+
+

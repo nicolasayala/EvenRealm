@@ -14,7 +14,6 @@ __meta__ = {
 "_edit_group_": true
 }
 type = 0
-gen_territory = true
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -41,7 +40,5 @@ tile_id = 0
 tilesheet_cols = 16
 tilesheet_rows = 4
 tile_size = Vector2( 12, 10 )
-
-[node name="Top" type="Sprite" parent="." index="2"]
 
 

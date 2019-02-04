@@ -1,5 +1,6 @@
 extends Node
 
+signal generation_start()
 signal generation_end()
 signal tile_generated(tile)
 
@@ -31,6 +32,7 @@ func _process(delta):
 func start():
 	if generating:
 		return
+	emit_signal("generation_start")
 	start_time = OS.get_ticks_msec()
 	generating = true
 	set_process(true)
