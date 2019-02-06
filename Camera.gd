@@ -73,3 +73,11 @@ func _clamp_offset():
 	offset.x = clamp(offset.x, - w, w)
 	offset.y = clamp(offset.y, - h, h)
 	set_offset(offset)
+
+func get_screen_rect():
+	var zoom = ZOOM_LEVELS[_current_zoom_index]
+	var camera_size = bounds * zoom
+	return Rect2(
+		offset - camera_size * 0.5 + Vector2(320, 180),
+		camera_size
+	)

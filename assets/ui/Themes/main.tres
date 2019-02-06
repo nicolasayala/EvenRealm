@@ -39,7 +39,7 @@ anti_aliasing = false
 anti_aliasing_size = 1
 _sections_unfolded = [ "Anti Aliasing", "Border", "Border Width" ]
 
-[sub_resource type="StyleBoxLine" id=4]
+[sub_resource type="StyleBoxLine" id=2]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -51,7 +51,7 @@ thickness = 1
 vertical = false
 _sections_unfolded = [ "Content Margin" ]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -80,7 +80,7 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Border", "Border Width" ]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -139,7 +139,7 @@ CheckBox/styles/hover = null
 CheckBox/styles/normal = null
 CheckBox/styles/pressed = null
 HSeparator/constants/separation = 1
-HSeparator/styles/separator = SubResource( 4 )
+HSeparator/styles/separator = SubResource( 2 )
 Label/colors/font_color = Color( 0.4, 0.32549, 0.286275, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/constants/line_spacing = 0
@@ -177,8 +177,8 @@ TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
 TabContainer/styles/panel = ExtResource( 7 )
-TabContainer/styles/tab_bg = SubResource( 2 )
-TabContainer/styles/tab_fg = SubResource( 3 )
+TabContainer/styles/tab_bg = SubResource( 3 )
+TabContainer/styles/tab_fg = SubResource( 4 )
 ToolButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.9, 0.95, 1, 0.3 )
 ToolButton/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )

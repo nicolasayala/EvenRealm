@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/Themes/main.tres" type="Theme" id=1]
+[ext_resource path="res://ui/InfoPanel/MapIcon.gd" type="Script" id=2]
+
+[node name="MapIcon" type="PanelContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 110.0
+margin_bottom = 10.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Theme" ]
+colors = [ Color( 0, 0, 0, 1 ), Color( 0.054902, 0.215686, 0.380392, 1 ), Color( 0.329412, 0.501961, 0.25098, 1 ), Color( 0.839844, 0.0557709, 0.0557709, 1 ), Color( 0.768627, 0.541176, 0.52549, 1 ) ]
+width = 102
+height = 102
+
+[node name="MapIconTexture" type="TextureRect" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 5.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+stretch_mode = 0
+
+

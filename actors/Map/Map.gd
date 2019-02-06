@@ -12,11 +12,14 @@ func clear():
 func add_tile(tile):
 	var territory = Territory.new(tile)
 	$Territories.add_child(territory)
-	emit_signal("territory_added", territory)
 	$HexGrid.add_node(tile)
 
-#func on_tile_input_event(event, tile):
-#	if event.is_action_pressed("territory_expand"):
-#		if (selected_territory and selected_territory.type == selected_territory.TYPE.PLAYER):
-#			if (selected_territory.is_neighbour(tile)):
-#				selected_territory.grow(tile)
+func init_territories():
+	for territory in get_territories():
+		emit_signal("territory_added", territory)
+
+func get_territories():
+	return $Territories.get_children()
+
+func get_tiles():
+	return $HexGrid.get_nodes()

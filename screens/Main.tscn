@@ -3,13 +3,13 @@
 [ext_resource path="res://screens/Main.gd" type="Script" id=1]
 [ext_resource path="res://actors/Map/Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/MapGenerator/MapGenerator.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/TerritoryManager/TerritoryManager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/TerritorySelector/TerriotrySelector.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.gd" type="Script" id=5]
 [ext_resource path="res://actors/TurnManager/TurnManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/FPSCounter.gd" type="Script" id=7]
 [ext_resource path="res://ui/InfoPanel/InfoPanel.tscn" type="PackedScene" id=8]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -17,7 +17,7 @@ script = ExtResource( 1 )
 
 [node name="MapGenerator" parent="Map" index="2" instance=ExtResource( 3 )]
 
-[node name="TerritoryManager" parent="Map" index="3" instance=ExtResource( 4 )]
+[node name="TerritorySelector" parent="Map" index="3" instance=ExtResource( 4 )]
 
 [node name="Camera" type="Camera2D" parent="." index="1"]
 
@@ -52,7 +52,6 @@ bounds = Vector2( 640, 360 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
